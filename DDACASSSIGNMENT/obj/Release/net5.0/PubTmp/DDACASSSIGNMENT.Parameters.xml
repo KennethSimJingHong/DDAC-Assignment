@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="DDACASSSIGNMENT20210801173342" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\hp\\source\\repos\\DDACASSSIGNMENT-FINAL\\DDACASSSIGNMENT\\obj\\Release\\net5\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="DDACASSSIGNMENT.Data.ApplicationDbContext" description="" value="Data Source=tcp:ddacasssignmentdbserver.database.windows.net,1433;Initial Catalog=DDACASSSIGNMENT_db;User Id=apuadmin@ddacasssignmentdbserver;Password=Apu@1234" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\hp\\source\\repos\\DDACASSSIGNMENT-FINAL\\DDACASSSIGNMENT\\obj\\Release\\net5\.0\\PubTmp\\EFSQLScripts\\DDACASSSIGNMENT\.Data\.ApplicationDbContext\.sql$" />
+  </parameter>
+</parameters>

@@ -1,0 +1,42 @@
+﻿@model List<Brochure>;
+@using DDACASSSIGNMENT.Utility;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Brochure</h1>
+
+<div class="container">
+    @if (User.IsInRole(SD.Role_Admin))
+    {
+        <div class="col-12 text-right mt-4 mb-4">
+            <a class="btn btn-info" asp-action="Insert"><i class="fas fa-plus"></i> &nbsp; Add Brochure</a>
+        </div>
+    } 
+    <div class="row">
+        @if (Model.Count != 0)
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="card m-2" id="gallery" style="width: 18rem">
+                    <div class="card-header"><h5 class="card-title">@Model[i].Name</h5></div>
+                    <img class="card-img-top" src="@Model[i].ImageUrl" width="100%" />
+                    <div class="card-body">
+                        <div class="row">
+                            <a class="col" asp-action="Download" asp-route-name="@Model[i].Name" style="height: 40px; text-decoration:none; text-align:center; background-color:cornflowerblue; border: none; color: white">Download</a>
+                            @if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <a class="col" asp-action="Delete" asp-route-id="@Model[i].Id" style="height: 40px; text-decoration:none; text-align:center; background-color:red; border: none; color: white">Delete</a>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+
+
+</div>
+

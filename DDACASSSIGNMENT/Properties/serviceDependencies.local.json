@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "storage2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/blobstoragetp053265",
+      "type": "storage.azure",
+      "connectionId": "blobstorageconnection",
+      "secretStore": null
+    }
+  }
+}

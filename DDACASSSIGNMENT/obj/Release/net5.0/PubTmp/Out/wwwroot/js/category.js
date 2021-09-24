@@ -1,0 +1,54 @@
+﻿var dataTable;
+
+
+dataTable = $("#tblData").DataTable({
+    "ajax": {
+        "url": "/Admin/Category/GetAll"
+    },
+    "columns": [
+        { "data": "name", "width": "25%" },
+        { "data": "description", "width": "25%" },
+        {
+            "data": "id",
+            "render": function (data) {
+                return `
+                    <div class="text-center">
+                        <a href="/Admin/Category/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a onclick=Delete("/Admin/Category/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+    
+                `;
+            }, "width": "45%"
+        }
+    ]
+});
+
+function Delete(url) {
+
+    swal({
+        title: "Delete Category",
+        text: "Are you sure to delete?",
+        buttons: true,
+        dangerMode: true
+    }).then((isDelete) => {
+        if (isDelete) {
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            })
+        }
+    });
+}
+

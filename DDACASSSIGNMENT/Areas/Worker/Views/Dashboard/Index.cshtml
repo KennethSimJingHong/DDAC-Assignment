@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dashboard</h1><br><br>
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-dark">Operation</h2>
+    </div>
+</div>
+
+<table class="table" id="tblData">
+    <thead>
+        <tr>
+            <th>
+                Service Type
+            </th>
+            <th>
+                Size
+            </th>
+            <th>Total Price (RM)</th>
+            <th>Subscription Duration *Main ONLY)</th>
+            <th>Purchase Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    
+</table>
+
+
+@section Scripts{ 
+    <script>
+        var dataTable;
+        dataTable = $("#tblData").DataTable({
+            "ajax": {
+                "url": "/Worker/Dashboard/GetData"
+            },
+            "columns": [
+                { "data": "order.service.type", "width": "20%" },
+                { "data": "order.service.size.name", "width": "20%" },
+                { "data": "totalPrice", "width": "20%" },
+                { "data": "duration", "width": "20%" },
+                { "data": "operationDate", "width": "35%" },
+                {
+                    "data": "order",
+                    "render": function (data) {
+
+                        return `
+                    <div class="text-center">
+                        <a href="/Admin/Operation/Edit/${data.applicationUser.id + ' ' + data.id}" class="btn btn-warning text-white" style="cursor:pointer">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                    </div>
+                    
+    
+                `;
+                    }, "width": "30%"
+                }
+            ]
+        });
+    </script>
+}

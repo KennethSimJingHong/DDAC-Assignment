@@ -1,0 +1,56 @@
+﻿@model DDACASSSIGNMENT.Models.Group
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Group";
+}
+
+
+<form method="post">
+
+    @if (Model.Id != 0)
+    {
+        title = "Edit Group";
+    }
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row p-3 border">
+        <div class="col-12 border-bottom">
+            <h2 class="text-dark">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="form-group row">
+                    @for (int i = 0; Model.UserList.Count > i; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.UserList[i].isCheck" />
+                        <label asp-for="@Model.UserList[i].isCheck">@Model.UserList[i].UserName</label>
+                        <input type="hidden" asp-for="@Model.UserList[i].UserName" />
+                        <input type="hidden" asp-for="@Model.UserList[i].UserId" />
+                    }
+
+                </div>*@
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+                        <partial name="_EditandBackToList" model="Model.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_CreateandBackToList" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

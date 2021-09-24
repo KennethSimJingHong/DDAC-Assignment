@@ -1,0 +1,173 @@
+﻿@model DDACASSSIGNMENT.Models.ViewModel.PaymentViewModel
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Purchase" asp-controller="Order" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row p-3 border">
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Service Type
+                </div>
+                <div class="col-8">
+                    <input asp-for="Operation.Order.Service.Type" class="form-control" id="servicetype" readonly />
+                    <span asp-validation-for="Operation.Order.Service.Type" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Operation.Order.Service.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Operation.Order.Service.Price" class="form-control" readonly />
+                    <span asp-validation-for="Operation.Order.Service.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    <input asp-for="Operation.Order.Service.Category.Name" class="form-control" readonly />
+                    <span asp-validation-for="Operation.Order.Service.Category.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            @if (Model.Operation.Order.Service.Type.CompareTo("Extra") != 0)
+            {
+                <div id="periodoption">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Period
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Operation.Order.Service.Period.Name" class="form-control" readonly />
+                            <span asp-validation-for="Operation.Order.Service.Period.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            }
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Size
+                </div>
+                <div class="col-8">
+                    <input asp-for="Operation.Order.Service.Size.Name" class="form-control" readonly />
+                    <span asp-validation-for="Operation.Order.Service.Size.Name" class="text-danger"></span>
+                </div>
+            </div><br>
+
+            @if (Model.Operation.Order.Service.Type.CompareTo("Extra") != 0)
+            {
+                <div class="form-group row">
+                    <div class="col-4">
+                        Subscription Duration
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(c => c.Operation.Duration, new List<SelectListItem>
+                       {
+                           new SelectListItem{Text="3 Months",Value="3" },
+                           new SelectListItem{Text="6 Months",Value="6" },
+                           new SelectListItem{Text="9 Months",Value="9" },
+                           new SelectListItem{Text="12 Months",Value="12" }
+                       }, "Select a Duration", new { @class = "form-control", @id = "blank" })
+                        <span asp-validation-for="Operation.Duration" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+            <input type="hidden" asp-for="Operation.Order.Service.Id" value="@Model.Operation.Order.Service.Id" />
+        </div>
+    </div><br>
+    <div class="row p-3 border">
+        @if (Model.CardList.Count() == 0)
+        {
+            <div class="col-8 pt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        Card Holder Name
+                    </div>
+                    <div class="col-8">
+                        <input type="text" required="required" name="cardName" class="form-control" />
+                    </div>
+                </div><br />
+                <div class="form-group row">
+                    <div class="col-4">
+                        Card Number
+                    </div>
+                    <div class="col-8">
+                        <input type="text" required="required" name="cardNumber" class="form-control" maxlength="16" />
+                    </div>
+                </div><br />
+                <div class="form-group row">
+                    <div class="col-4">
+                        Expiry Date
+                    </div>
+                    <div class="col-8">
+                        <input type="text" required="required" name="expiryDate" class="form-control" />
+                    </div>
+                </div><br />
+                <div class="form-group row">
+                    <div class="col-4">
+                        CVV Code
+                    </div>
+                    <div class="col-8">
+                        <input type="text" required="required" name="cvcCode" class="form-control" maxlength="4" />
+                    </div>
+                </div><br />
+            </div>
+        }
+        else
+        {
+            foreach (var card in Model.CardList)
+            {
+                <div class="col-8 pt-4">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Card Holder Name
+                        </div>
+                        <div class="col-8">
+                            @Html.DisplayFor(modelItem => card.cardName)
+                        </div>
+                    </div><br />
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Card Number
+                        </div>
+                        <div class="col-8">
+                            @Html.DisplayFor(modelItem => card.RowKey)
+                        </div>
+                    </div><br />
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Expiry Date
+                        </div>
+                        <div class="col-8">
+                            @Html.DisplayFor(modelItem => card.expiryDate)
+                        </div>
+                    </div><br />
+                    <div class="form-group row">
+                        <div class="col-4">
+                            CVC Code
+                        </div>
+                        <div class="col-8">
+                            @Html.DisplayFor(modelItem => card.CVV)
+                        </div>
+                    </div><br />
+                </div>
+
+            }
+        }
+    </div><br>
+    <div class="form-group text-center">
+        <input type="submit" value="Purchase" class="btn btn-success form-control" style="width:500px">
+    </div>
+</form>

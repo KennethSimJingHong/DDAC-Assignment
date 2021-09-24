@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+<div class="swiper-container mySwiper" style="width:80vw; height:70vh">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="img\Screenshot 2021-07-07 at 10.47.10 AM.png" style="width:80vw; height:70vh" /></div>
+        <div class="swiper-slide"><img src="img\Screenshot 2021-07-07 at 10.47.20 AM.png" style="width:80vw; height:70vh" /></div>
+        <div class="swiper-slide"><img src="img\Screenshot 2021-07-07 at 10.47.26 AM.png" style="width:80vw; height:70vh" /></div>
+        <div class="swiper-slide"><img src="img\Screenshot 2021-07-07 at 10.47.31 AM.png" style="width:80vw; height:70vh" /></div>
+        <div class="swiper-slide"><img src="img\Screenshot 2021-07-07 at 10.47.49 AM.png" style="width:80vw; height:70vh" /></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+@section Scripts{
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+}

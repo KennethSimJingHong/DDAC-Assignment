@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeBYfe+3X1kGp2VxOtRPhKAAAAAACAAAAAAAQZgAAAAEAACAAAACU8gNiNUnamoP/cXMn2F9wKqkvNpd5baunh4/b1wsAXQAAAAAOgAAAAAIAACAAAACVnHUi0kkpGlZlTeUsob+XRibcsdV4jc5f5urvixl9B4AAAADyXw+uwVqtki19TlEKj8aPMJfdRZHSJUe5I5SLxlGODc9Iy8N9XSZchNiDldDL1H6rU6ljzOpwSUVnu4zgQk4uZ8nXreTHhqlR18nHT9lNYN5UEADXftZV/4J29ZaD3XJDR7XMdOI55aOHM7hg5vYj55Fi+ho3lsZhDeIQEqCEUkAAAADXzySwSDjc8wDnG6uxNTqc2kyjhxuNTt9s8p8QRCC+01jWZyaopkcz0K1Cgequa1Mb6b7Z+UP/qrfHvsZRFD9+</EncryptedPassword>
+    <History>True|2021-08-01T14:36:21.9970631Z;True|2021-08-01T21:33:21.5686949+08:00;True|2021-08-01T19:50:22.0767799+08:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:ddacasssignmentdbserver.database.windows.net,1433%3bInitial Catalog=DDACASSSIGNMENT_db%3bUser Id=apuadmin%40ddacasssignmentdbserver%3bPassword=Apu%401234</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="DDACASSSIGNMENT.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:ddacasssignmentdbserver.database.windows.net,1433%3bInitial Catalog=DDACASSSIGNMENT_db%3bUser Id=apuadmin%40ddacasssignmentdbserver%3bPassword=Apu%401234</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

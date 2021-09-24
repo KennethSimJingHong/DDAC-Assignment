@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DDACASSSIGNMENT.Models.Card>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-dark">Card Management</h2>
+    </div>
+    @if (Model.Count() == 0) { 
+    <div class="col-6 text-right">
+        <a class="btn btn-info" asp-action="Index"><i class="fas fa-plus"></i> &nbsp; Add Card</a>
+    </div>
+    }
+</div><br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h2 class="text-dark">Cards</h2>
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div>
+                        <div class="cards" style="        border: solid;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                width: 500px;
+                height: 50px; background-color:aqua"></div>
+                        <div class="cards" style="        border-left-style: solid;
+                border-right-style: solid;
+                width: 500px;
+                height: 50px"></div>
+                        <div class="cards" style="        border: solid;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                width: 500px;
+                height: 200px;
+                background-color: aqua">
+                            <br>
+                            <div class="col-8">
+                                <h1>&nbsp;&nbsp; @Html.DisplayFor(modelItem => item.cardName)</h1>
+                            </div>
+                            <div class="col-8">
+                                <h1>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.RowKey)</h1>
+                            </div>
+                            <div class="form-group row" style="justify-content:space-between">
+                                <div class="col-4">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(modelItem => item.expiryDate)
+                                </div>
+                                <div class="col-4">
+                                    @Html.DisplayFor(modelItem => item.CVV)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </td>
+                <td>
+                    <a asp-route-rkey="@item.RowKey" asp-action="DeleteRecord" asp-controller="Card" class="btn btn-danger text-white" style="cursor:pointer; width:50px">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

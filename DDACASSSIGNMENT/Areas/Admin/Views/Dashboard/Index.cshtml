@@ -1,0 +1,160 @@
+﻿@model IEnumerable<DDACASSSIGNMENT.Models.Log>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Total Users
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="chart1" height="320"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Total Earning
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="chart2" height="150"></canvas>
+                <canvas class="my-4 h-25" id="chart4" height="149"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Total Services
+            </div>
+            <div class="card-body">
+                <canvas class="my-4 h-25" id="chart3" height="320"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<div style="height:300px; display:block; overflow-y:scroll; border: 1px solid gray">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Email Address
+                </th>
+                <th>
+                    TimeStamp
+                </th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartitionKey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Timestamp) Months
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        var chart1 = document.getElementById('chart1').getContext('2d');
+        var chart2 = document.getElementById('chart2').getContext('2d');
+        var chart3 = document.getElementById('chart3').getContext('2d');
+        var chart4 = document.getElementById('chart4').getContext('2d');
+
+        $.ajax({
+            url: "/Admin/Dashboard/GetAll",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                new Chart(chart1, {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: data.data1,
+                            backgroundColor: ["#Eeb346b", "#43AA8B", "#253D5B"],
+                        }],
+                        labels: ["Admin", "Driver", "Customer"],
+                    },
+                    options: {
+                        title: {
+                            text: "Users",
+                            display: true,
+                        }
+                    }
+                });
+
+                new Chart(chart2, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: data.data2,
+                            label: "Months",
+                            backgroundColor: ["#baddad", "#fec3ff", "#efffa1", "#ffa1ef", "#c5c5ff", "#d9fbf7"],
+                        }],
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    },
+                    options: {
+                        title: {
+                            text: "Earning",
+                            display: true,
+                        }
+                    }
+                });
+
+                new Chart(chart3, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: data.data32,
+                            label: "Category",
+                            fill: false,
+                            backgroundColor: "#FA8072",
+                        }],
+                        labels: data.data31,
+                    },
+                    options: {
+                        title: {
+                            text: "Services",
+                            display: true,
+                        }
+                    }
+                });
+
+                new Chart(chart4, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: data.data4,
+                            label: "Months",
+                            backgroundColor: ["#99eeff", "#93bd8c", "#ff99ff", "#c5c5ff", "#c5c5ff", "#fbd6b7"],
+                        }],
+                        labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    },
+
+                });
+
+            },
+        })
+    </script>
+}
+

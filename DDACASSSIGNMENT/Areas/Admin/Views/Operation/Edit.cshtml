@@ -1,0 +1,172 @@
+﻿@model DDACASSSIGNMENT.Models.ViewModel.OperationViewModel;
+@using DDACASSSIGNMENT.Utility;
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var data = Model.OperationList.First();
+}
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row p-3 border">
+        <div class="col-12 border-bottom">
+            <h2 class="text-dark">Order ID: @data.RowKey</h2>
+        </div>
+        <div class="row">
+            <div class="col-5 pt-4">
+                <div class="row">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-info">
+                            Customer Info
+                        </span>
+                    </h4>
+                </div>
+                <input type="hidden" asp-for="@Model.Operation.Order.Id" value="@data.Order.Id" class="form-control" />
+                <input type="hidden" asp-for="@Model.Operation.Order.ApplicationUser.Id" value="@data.Order.ApplicationUser.Id" class="form-control" />
+                
+                <div class="row my-1">
+                    <div class="col-3">ID</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.Id" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Name</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.Name" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Phone No.</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.PhoneNumber" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Email</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.Email" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Address</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.Address" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">City</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.ApplicationUser.City" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-5 pt-4">
+                <div class="row">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-info">
+                            Operation Info
+                        </span>
+                    </h4>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Purchase Date</div>
+                    <div class="col-9">
+                        <input asp-for="@data.OperationDate" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Operation Group</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Group" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-5 pt-4">
+                <div class="row">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-info">
+                            Service Info
+                        </span>
+                    </h4>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">ID</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.Service.Id" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Category</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.Service.Category.Name" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Period</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.Service.Period.Name" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Duration</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Duration" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Size</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.Service.Size.Name" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Price (RM)</div>
+                    <div class="col-9">
+                        <input asp-for="@data.Order.Service.Price" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-3">Total Price (RM)</div>
+                    <div class="col-9">
+                        <input asp-for="@data.TotalPrice" readonly type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+
+            </div>
+            @if(User.IsInRole(SD.Role_Admin)){
+                <div class="col-5 border">
+                    <div class="row">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3 bg-info py-3">
+                            <span class="text-white">
+                                Modify Group
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="row my-1">
+                        <div class="col">
+                            @Html.DropDownListFor(c => c.Operation.Group, Model.GroupList, "Select a Group", new { @class = "form-control" })
+                        </div>
+                        <span asp-validation-for="GroupList" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success" style="margin-top:20px; margin-right:20px">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>    
+</form>
+

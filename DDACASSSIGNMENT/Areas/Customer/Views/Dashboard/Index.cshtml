@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DDACASSSIGNMENT.Models.Operation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dashboard</h1><br><br>
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-dark">Purchase History</h2>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Service Type
+            </th>
+            <th>
+                Category
+            </th>
+            <th>Size</th>
+            <th>Total Price (RM)</th>
+            <th>Subscription Duration *Main ONLY</th>
+            <th>Purchase Date</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Service.Type)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Order.Service.Category.ImageUrl)" width="200"/>
+                <p><br> Category: @Html.DisplayFor(modelItem => item.Order.Service.Category.Name)</p>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Service.Size.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration) Months
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OperationDate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

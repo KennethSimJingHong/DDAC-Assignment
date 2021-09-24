@@ -1,0 +1,55 @@
+﻿@model DDACASSSIGNMENT.Models.Card
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Add" asp-controller="Card" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row p-3 border">
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Card Holder Name
+                </div>
+                <div class="col-8">
+                    <input asp-for="cardName" required="required" class="form-control"/>
+                    <span asp-validation-for="cardName" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group row">
+                <div class="col-4">
+                    Card Number
+                </div>
+                <div class="col-8">
+                    <input asp-for="RowKey" required="required" class="form-control" maxlength="16"  />
+                    <span asp-validation-for="RowKey" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group row">
+                <div class="col-4">
+                    Expiry Date
+                </div>
+                <div class="col-8">
+                    <input type="month" asp-for="expiryDate" required="required" class="form-control" />
+                    <span asp-validation-for="expiryDate" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group row">
+                <div class="col-4">
+                    CVC Code
+                </div>
+                <div class="col-8">
+                    <input asp-for="CVV" required="required" class="form-control" maxlength="4" />
+                    <span asp-validation-for="CVV" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success form-control">
+            </div>
+        </div>
+    </div>
+</form>

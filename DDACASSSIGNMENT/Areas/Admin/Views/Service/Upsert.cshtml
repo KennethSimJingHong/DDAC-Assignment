@@ -1,0 +1,110 @@
+﻿@model DDACASSSIGNMENT.Models.ViewModel.ServiceViewModel
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Service";
+}
+
+<form method="post">
+
+    @if (Model.Service.Id != 0)
+    {
+        title = "Edit Service";
+        @*<input type="hidden" asp-for="Service.Id" />*@
+    }
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row p-3 border">
+        <div class="col-12 border-bottom">
+            <h2 class="text-dark">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    Type
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(c => c.Service.Type, new List<SelectListItem>
+                    {
+                        new SelectListItem{Text="Main",Value="Main" },
+                        new SelectListItem{Text="Extra",Value="Extra" }
+                    }, "Select a Type", new { @class = "form-control", @id = "blank" })
+                    <span asp-validation-for="Service.Type" class="text-danger"></span>
+                </div>
+            </div><br />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Price"> Price <span id="price">(Per Month)</span></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Service.Price" class="form-control" />
+                    <span asp-validation-for="Service.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(c => c.Service.CategoryId, Model.CategoryList, "Select a Category", new { @class = "form-control" })
+                    <span asp-validation-for="Service.CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            
+            <div id="periodoption">
+                <div class="form-group row">
+                    <div class="col-4">
+                        Period
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownListFor(c => c.Service.PeriodId, Model.PeriodList, "Select a Period", new { @class = "form-control" })
+                        <span asp-validation-for="Service.PeriodId" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    Size
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(c => c.Service.SizeId, Model.SizeList, "Select a Size", new { @class = "form-control" })
+                    <span asp-validation-for="Service.SizeId" class="text-danger"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="Service.Id" value="@Model.Service.Id" />
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Service.Id != 0)
+                    {
+                        <partial name="_EditandBackToList" model="Model.Service.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_CreateandBackToList" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        $("#blank").change(function () {
+            if ($("#blank option:selected").text() == "Extra") {
+                $("#periodoption").css("display", "none");
+                $("#price").html(" (One Time)");
+                $("#periodoption").css("display", "none");
+            } else {
+                $("#periodoption").css("display", "block");
+                $("#price").html(" (Per Month)");
+                $("#periodoption").css("display", "block");
+            }
+        });
+
+    </script>
+}
